@@ -1,5 +1,6 @@
 using Job_Posting_Site.Data;
 using Job_Posting_Site.Data.Entities.Account;
+using Job_Posting_Site.Services;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
@@ -18,6 +19,8 @@ builder.Services.ConfigureApplicationCookie(options =>
 {
     options.LoginPath = "/Account/Login";
 });
+
+builder.Services.AddScoped<AdService, AdService>();
 
 builder.Services.AddControllersWithViews();
 var app = builder.Build();
