@@ -1,6 +1,7 @@
 ﻿using Job_Posting_Site.Data.Entities.Account;
 using Job_Posting_Site.Data;
 using System.Security.Claims;
+using Job_Posting_Site.Data.Entities;
 
 namespace Job_Posting_Site.Services
 {
@@ -14,7 +15,19 @@ namespace Job_Posting_Site.Services
         public ApplicationUser FindUser(ClaimsPrincipal user)
         {
             string userId = user.FindFirst(ClaimTypes.NameIdentifier)?.Value;
-            return (ApplicationUser)context.Users.FirstOrDefault(x => x.Id == userId);
+            return context.Users.FirstOrDefault(x => x.Id == userId);
+        }
+        public Role FindRole(ClaimsPrincipal user)
+        {
+            string userId = user.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+            var role = context.Users.Where(x => x.Id == userId).Select(x => new ApplicationUser() { 
+                Role = x.Role,
+            }).FirstOrDefault();
+            return context.Roles.Where(x=> x.Id == role.Role.Id).Select(x => new Role()
+            {
+                Id = x.Id,
+                Name = x.Name,
+            }).FirstOrDefault();
         }
         public string OwnerName(ApplicationUser user)
         {

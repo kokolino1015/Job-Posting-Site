@@ -19,7 +19,7 @@ namespace Job_Posting_Site.Services
             Ad ad = new Ad()
             {
                 Description = model.Description,
-                Category = model.Category,
+                Category = context.Categories.Where(x => x.Id == model.Category).FirstOrDefault(),
                 Owner = model.Owner
             };
             context.Ads.Add(ad);
@@ -48,7 +48,7 @@ namespace Job_Posting_Site.Services
             {
                 Id = id,
                 Description = ad.Description,
-                Category = ad.Category,
+                Category = ad.Category.Id,
                 Owner = ad.Owner
             }).FirstOrDefault();
         }
@@ -56,7 +56,12 @@ namespace Job_Posting_Site.Services
         {
             Ad ad = context.Ads.Find(model.Id);
             ad.Description = model.Description;
-            ad.Category= model.Category;
+            ad.Category= context.Categories.Where(x => x.Id == model.Category).FirstOrDefault();
+            this.context.SaveChanges();
+        }
+        public void Delete(int id)
+        {
+            this.context.Ads.Remove(this.context.Ads.Find(id));
             this.context.SaveChanges();
         }
 
