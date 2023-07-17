@@ -1,0 +1,18 @@
+﻿@model Job_Posting_Site.Models.AdViewModel.AdFormModel
+@{
+    ViewBag.Title = "View Ad Details";
+}
+<h2 class="text-center">@ViewBag.Title</h2>
+<hr />
+<div class="d-flex justify-content-center flex-wrap">
+    <div class="card " style="width: 50vw;">
+        <div class="card-body">
+            <h3 class="card-title text-center">@Model.Description</h3>
+            <p class="card-text"><span class="fw-bold">Author: </span>@Model.Owner</p>
+            @if ("candidate" == this.ViewBag.Role)
+            {
+         
+            }
+        </div>
+    </div>
+</div>

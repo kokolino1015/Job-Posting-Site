@@ -1,0 +1,39 @@
+﻿@model Job_Posting_Site.Models.AdViewModel.AdFormModel
+@{
+    ViewBag.Title = "Add Ad";
+}
+
+<h2 class="text-center">@ViewBag.Title</h2>
+<hr />
+<div class="row">
+    <div class="col-sm-12 offset-lg-2 col-lg-8 offset-xl-3 col-xl-6">
+        <form asp-action="Create" method="post">
+            <div class="mb-3">
+                <label asp-for="Description" class="form-label">Title</label> <input asp-for="Description"
+                                                                               class="form-control"
+                                                                               aria-required="true" />
+                <span asp-validation-for="Description" class="text-danger"></span>
+            </div>
+            <div class="mb-3">
+                <label asp-for="Category" class="form-label">Category</label> <select asp-for="Category"
+                                                                                  class="form-control">
+                    @foreach (var category in ViewBag.Categories)
+                    {
+                        <option value="@category">@category.Name</option>
+                    }
+
+                </select> <span asp-validation-for="Category" class="text-danger"></span>
+            </div>
+            <div class="mb-3">
+                <label hidden="hidden" asp-for="Owner" class="form-label">@Model.Owner</label>
+                <input hidden="hidden" asp-for="Owner" class="form-control" aria-required="true" />
+                <span asp-validation-for="Owner" class="text-danger" hidden="hidden"></span>
+            </div>
+            <div class="mb-3"><input class="btn btn-secondary mb-2" type="submit" value="Add" /></div>
+        </form>
+    </div>
+</div>
+@section Scripts
+    {
+    <partial name="_ValidationScriptsPartial" />
+}
