@@ -8,5 +8,6 @@ namespace Job_Posting_Site.Data.Entities
         public string Description { get; set; }
         public Category Category { get; set; }
         public IEnumerable<ApplicationUser> Candidates { get; set; }
+        public ApplicationUser Owner { get; set; }
     }
 }
