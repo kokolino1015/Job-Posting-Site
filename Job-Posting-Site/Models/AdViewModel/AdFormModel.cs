@@ -11,7 +11,7 @@ namespace Job_Posting_Site.Models.AdViewModel
         [Required]
         public string Description { get; set; }
         [Required]
-        public Category Category { get; set; }
+        public int Category { get; set; }
         [Required]
         public ApplicationUser Owner { get; set; }
     }
