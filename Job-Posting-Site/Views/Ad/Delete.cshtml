@@ -1,4 +1,20 @@
-﻿@page
-@model Job_Posting_Site.Views.Ad.DeleteModel
+﻿@model Job_Posting_Site.Models.AdViewModel.AdFormModel
 @{
+    ViewData["Title"] = "Delete Ad";
 }
+<h2 class="text-center">@ViewBag.Title</h2>
+<hr />
+<form asp-action="Delete">
+    <div class="d-flex justify-content-center">
+        <div class="card " style="width: 50rem;">
+            <div class="card-body">
+                <h3 class="card-title text-center">@Model.Description</h3>
+                <p class="card-text"><span class="fw-bold">Author: </span>@Model.Owner</p>
+                @*<p class="card-text"><span class="fw-bold">Category: </span>@Model.Category.Name</p>*@
+            </div>
+            <div class="mb-3 d-flex justify-content-center">
+                <input type="submit" value="Delete" class="btn btn-secondary mb-2" />
+            </div>
+        </div>
+    </div>
+</form>
