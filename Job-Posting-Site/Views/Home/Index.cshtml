@@ -3,13 +3,39 @@
 }
 
 <div class="text-center">
-    <a asp-controller="Ad" asp-action="Create" class="btn btn-primary mb-2">Create ad</a>
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
-    <a asp-controller="Ad" asp-action="Edit" asp-route-id="6"
-       class="btn btn-primary mb-2">Edit</a>
-    <a asp-controller="Ad" asp-action="Delete" asp-route-id="6"
-       class="btn btn-primary mb-2">Delete</a>
-    <a asp-controller="Ad" asp-action="Details" asp-route-id="6"
-       class="btn btn-primary mb-2">Details</a>
+    @if(ViewBag.Role == "employ")
+    {
+        <a asp-controller="Ad" asp-action="Create" class="btn btn-primary mb-2">Create ad</a>
+    }
+    @foreach(var ad in ViewBag.Ads)
+    {
+        <div class="card" style="width: 20rem;">
+            <ul class="list-group list-group-flush">
+                <li class="list-group-item">
+                    <span class="fw-bold">Category: </span> @foreach (var category in ViewBag.Categories)
+                    {
+                        if (category.Id == ad.Category)
+                        {
+                            <p class="fs-1">@category.Name</p>
+                        }
+
+                    }
+                </li>
+                <li class="list-group-item"><span class="fw-bold">Description: </span> : @ad.Description</li>
+                <li class="list-group-item">
+                    <a asp-controller="Ad" asp-action="Details" asp-route-id="@ad.Id"
+                       class="btn btn-primary mb-2">View</a>
+                    @if (this.ViewBag.Owner == ad.Owner)
+                    {
+                        <a asp-controller="Ad" asp-action="Edit" asp-route-id="@ad.Id"
+                           class="btn btn-primary mb-2">Edit</a>
+                        <a asp-controller="Ad" asp-action="Delete" asp-route-id="@ad.Id"
+                           class="btn btn-primary mb-2">Delete</a>
+                    }
+                </li>
+            </ul>
+        </div>        
+    }
+    
+    
 </div>
