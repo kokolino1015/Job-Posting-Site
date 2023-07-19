@@ -58,15 +58,19 @@ namespace Job_Posting_Site.Services
                 Candidates = ad.Candidates
             }).FirstOrDefault();
         }
-        public bool checkifUserInCandidateList(AdFormModel model, ApplicationUser user)
+        public string checkifUserInCandidateList(AdFormModel model, ApplicationUser user)
         {
-            var available = true;
+            var available = "unapplied";
             foreach (ApplicationUser u in model.Candidates)
             {
-                if (u.Id == user.Id || user.Role.Name == "employ")
+                if (u.Id == user.Id)
                 {
-                    available = false;
+                    available = "applied";
                 }
+            }
+            if(user.Role.Name == "employer")
+            {
+                available = "employer";
             }
             return available;
         }   

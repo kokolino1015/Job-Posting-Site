@@ -10,14 +10,21 @@
             <h2 class="card-title text-center">@ViewBag.Category</h2>
             <p class="card-text"><span class="fw-bold">Description: </span>@Model.Description</p>
             <p class="card-text"><span class="fw-bold">Author: </span>@Model.Owner</p>
+            @if (this.ViewBag.Owner == Model.Owner)
+            {
+                <a asp-controller="Ad" asp-action="Edit" asp-route-id="@Model.Id"
+                   class="btn btn-primary mb-2">Edit</a>
+                <a asp-controller="Ad" asp-action="Delete" asp-route-id="@Model.Id"
+                   class="btn btn-primary mb-2">Delete</a>
+            }
             @if (@ViewBag.Show)
             {
-                <a asp-controller="Ad" asp-action="Apply" asp-route-id="6"
+                <a asp-controller="Ad" asp-action="Apply" asp-route-id="@Model.Id"
                    class="btn btn-primary mb-2">Apply</a>
             }
-            @if (!@ViewBag.Show)
+            @if (!@ViewBag.Show && !ViewBag.Employer)
             {
-                <a asp-controller="Ad" asp-action="Unapply" asp-route-id="6"
+                <a asp-controller="Ad" asp-action="Unapply" asp-route-id="@Model.Id"
                    class="btn btn-primary mb-2">Unapply</a>
             }
         </div>
