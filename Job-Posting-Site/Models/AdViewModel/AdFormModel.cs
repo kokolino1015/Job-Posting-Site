@@ -14,5 +14,6 @@ namespace Job_Posting_Site.Models.AdViewModel
         public int Category { get; set; }
         [Required]
         public ApplicationUser Owner { get; set; }
+        public List<ApplicationUser> Candidates { get; set; } = new List<ApplicationUser>();
     }
 }
