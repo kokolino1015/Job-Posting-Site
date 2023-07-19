@@ -23,11 +23,15 @@ namespace Job_Posting_Site.Services
             var role = context.Users.Where(x => x.Id == userId).Select(x => new ApplicationUser() { 
                 Role = x.Role,
             }).FirstOrDefault();
-            return context.Roles.Where(x=> x.Id == role.Role.Id).Select(x => new Role()
-            {
-                Id = x.Id,
-                Name = x.Name,
-            }).FirstOrDefault();
+            if(role != null) {
+                return context.Roles.Where(x => x.Id == role.Role.Id).Select(x => new Role()
+                {
+                    Id = x.Id,
+                    Name = x.Name,
+                }).FirstOrDefault();
+            }
+            return null;
+            
         }
         public string OwnerName(ApplicationUser user)
         {
