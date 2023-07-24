@@ -36,9 +36,9 @@
                 <input asp-for="PasswordRepeat" class="form-control" autocomplete="new-password" aria-required="true" />
                 <label asp-for="PasswordRepeat"></label>
                 <span asp-validation-for="PasswordRepeat" class="text-danger"></span>
-            </div>
+            </div
+            <label>Role</label>
             <div class="form-floating">
-                <label asp-for="Role"></label>
                 <select asp-for="Role" class="form-control">
                     @foreach (Role role in ViewBag.Roles)
                     {

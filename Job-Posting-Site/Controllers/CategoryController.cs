@@ -83,10 +83,6 @@ namespace Job_Posting_Site.Controllers
         [HttpGet]
         public IActionResult Details(int id)
         {
-            if (!categoryService.CheckIfOwner(id, commonService.FindUser(User)))
-            {
-                return Unauthorized();
-            }
             var user = commonService.FindUser(User);
             ViewBag.Owner = user;
             var model = categoryService.GetCategoryById(id);

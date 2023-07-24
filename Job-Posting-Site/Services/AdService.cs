@@ -30,7 +30,7 @@ namespace Job_Posting_Site.Services
         }
         public List<Category> GetCategories()
         {
-            return context.Categories.Select(x => new Category
+            return context.Categories.Where(x=> !x.IsDeleted).Select(x => new Category
             {
                 Id = x.Id,
                 Name = x.Name,
