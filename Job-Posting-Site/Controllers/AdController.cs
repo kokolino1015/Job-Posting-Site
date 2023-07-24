@@ -101,6 +101,7 @@ namespace Job_Posting_Site.Controllers
         [HttpPost]
         public IActionResult Delete(AdFormModel model)
         {
+
             if (!adService.CheckIfOwner(model.Id, commonService.FindUser(User)))
             {
                 return Unauthorized();
@@ -113,6 +114,11 @@ namespace Job_Posting_Site.Controllers
         public IActionResult Apply(int  id)
         {
             if(commonService.FindRole(User).Name == "employer")
+            {
+                return RedirectToAction("Index", "Home");
+            }
+            var model = adService.GetAdById(id);
+            if (adService.checkifUserInCandidateList(model, commonService.FindUser(User)) != "unapplied")
             {
                 return RedirectToAction("Index", "Home");
             }
