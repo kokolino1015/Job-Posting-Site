@@ -17,7 +17,7 @@ Job Posting Site
       5. You should be able to start the project
 
 4. Usage:
-   
+   Our site makes possible finding a job as well as searching for a person for it. Everyone can make a profile in which they choose a role(employer, candidate). An employer can devise, edit and delete job offers as well as categories for advertisements and candidates can apply(once they apply they cannot apply for the same ad unless they cancel) and cancel their application for a job offer.
 
 5. Features:
    There is a reference (backend) that shows how many active listings we have by category and how many people have applied for each profession (QA, Developer, Manager, DevOps, PM).
