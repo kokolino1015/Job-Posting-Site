@@ -19,9 +19,9 @@ namespace Job_Posting_Site.Controllers
             this.adService = adService;
         }
 
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
-            List<AdFormModel> ads = adService.GetFirst10Ads();
+            List<AdFormModel> ads = await adService.GetFirst10Ads();
             var role = commonService.FindRole(User);
             if (role != null)
             {

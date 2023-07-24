@@ -2,6 +2,7 @@
 using Job_Posting_Site.Data.Entities;
 using Job_Posting_Site.Data.Entities.Account;
 using Job_Posting_Site.Models.AdViewModel;
+using Microsoft.EntityFrameworkCore;
 using System.Diagnostics.Metrics;
 using System.Security.Claims;
 
@@ -21,14 +22,15 @@ namespace Job_Posting_Site.Services
             {
                 Description = model.Description,
                 Category = context.Categories.Where(x => x.Id == model.Category).FirstOrDefault(),
-                Owner = model.Owner
+                Owner = model.Owner,
+                isDeleted = false
             };
             context.Ads.Add(ad);
             context.SaveChanges();
         }
         public List<Category> GetCategories()
         {
-            return context.Categories.Where(r => r.Id > -1).Select(x => new Category
+            return context.Categories.Select(x => new Category
             {
                 Id = x.Id,
                 Name = x.Name,
@@ -61,6 +63,10 @@ namespace Job_Posting_Site.Services
         public string checkifUserInCandidateList(AdFormModel model, ApplicationUser user)
         {
             var available = "unapplied";
+            if (user == null)
+            {
+                return available;
+            }
             foreach (ApplicationUser u in model.Candidates)
             {
                 if (u.Id == user.Id)
@@ -83,7 +89,8 @@ namespace Job_Posting_Site.Services
         }
         public void Delete(int id)
         {
-            this.context.Ads.Remove(this.context.Ads.Find(id));
+            var model = this.context.Ads.Find(id);
+            model.isDeleted = true;
             this.context.SaveChanges();
         }
         public void ApplyUser(ApplicationUser user, AdFormModel model)
@@ -98,16 +105,16 @@ namespace Job_Posting_Site.Services
             ad.Candidates.Remove(user);
             this.context.SaveChanges();
         }
-        public List<AdFormModel> GetFirst10Ads()
+        public async Task<List<AdFormModel>> GetFirst10Ads()
         {
-            return context.Ads.Take(10).Select(x => new AdFormModel()
+            return await context.Ads.Take(10).Where(x => !x.isDeleted).Select(x => new AdFormModel()
             {
                 Id = x.Id,
                 Candidates = x.Candidates,
                 Category = x.Category.Id,
                 Description = x.Description,
                 Owner = x.Owner
-            }).ToList();
+            }).ToListAsync();
         }
     }
 }

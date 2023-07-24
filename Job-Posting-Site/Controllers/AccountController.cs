@@ -7,7 +7,6 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
-using System.Data;
 using System.Linq;
 
 namespace Job_Posting_Site.Controllers
@@ -32,11 +31,15 @@ namespace Job_Posting_Site.Controllers
         public IActionResult Register()
         {
             var model = new RegisterViewModel();
-            ViewBag.Roles = context.Roles.Where(r => r.Id > -1).Select(x => new Role
+            ViewBag.Roles = context.Roles.Select(x => new Role
             {
                 Id = x.Id,
                 Name = x.Name,
-            });
+            } );
+            foreach (Role role in ViewBag.Roles)
+            {
+                var f = role;
+            }
             return View(model);
         }
 
@@ -48,7 +51,6 @@ namespace Job_Posting_Site.Controllers
             {
                 return View(model);
             }
-
             var user = new ApplicationUser()
             {
                 Email = model.Email,
@@ -58,7 +60,11 @@ namespace Job_Posting_Site.Controllers
                 UserName = model.Email,
                 Role = context.Roles.Where(r => r.Id == model.Role).FirstOrDefault()
             };
-
+            ViewBag.Roles = context.Roles.Select(x => new Role
+            {
+                Id = x.Id,
+                Name = x.Name,
+            });
             var result = await userManager.CreateAsync(user, model.Password);
 
 

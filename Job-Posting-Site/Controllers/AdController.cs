@@ -54,16 +54,24 @@ namespace Job_Posting_Site.Controllers
         public IActionResult Details(int id) 
         {
             var user = commonService.FindUser(User);
-            var role = commonService.FindRole(User);
-            if(role != null) {
+            ViewBag.Owner = null;
+            if (user != null) {
                 ViewBag.Role = commonService.FindRole(User).Name;
+                ViewBag.Owner = user;
             }
             ViewBag.Show = false;
             var model = adService.GetAdById(id);
-            if (adService.checkifUserInCandidateList(model, user))
+            if (adService.checkifUserInCandidateList(model, user) == "unapplied")
             {
                 ViewBag.Show = true; 
-            }                   
+            }
+            
+            ViewBag.Employer = false;
+            if (adService.checkifUserInCandidateList(model, user) == "employer")
+            {
+                ViewBag.Employer = true;
+            }
+            ViewBag.AdId = id;
             ViewBag.Category = adService.GetCategoryById(model.Category).Name;
             return View(model);
         }
@@ -92,6 +100,10 @@ namespace Job_Posting_Site.Controllers
         [HttpGet]
         public IActionResult Apply(int  id)
         {
+            if(commonService.FindRole(User).Name == "employer")
+            {
+                return RedirectToAction("Index", "Home");
+            }
             adService.ApplyUser(commonService.FindUser(User), adService.GetAdById(id));
             return RedirectToAction("Index", "Home");
         }
