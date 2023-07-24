@@ -80,14 +80,13 @@ namespace Job_Posting_Site.Controllers
         }
         [HttpGet]
         public IActionResult All() {
-            ViewBag.Role = commonService.FindRole(User).Name;
-            //var user = commonService.FindUser(User);
-            //ViewBag.Owner = null;
-            //if (user != null)
-            //{
-            //    ViewBag.Role = commonService.FindRole(User).Name;
-            //    ViewBag.Owner = user;
-            //}
+            var user = commonService.FindUser(User);
+            ViewBag.Owner = null;
+            if (user != null)
+            {
+                ViewBag.Role = commonService.FindRole(User).Name;
+                ViewBag.Owner = user;
+            }
             var categories = categoryService.GetAllCategories();
             ViewBag.Categories = categories;
             return View();

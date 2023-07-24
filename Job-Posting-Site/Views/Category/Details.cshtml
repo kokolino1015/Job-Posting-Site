@@ -3,6 +3,10 @@
     ViewData["Title"] = @Model.Name;
 }
 <h2 class="text-center">@Model.Name</h2>
+@if (ViewBag.Role == "employer")
+{
+    <a asp-controller="Ad" asp-action="Create" class="btn btn-primary mb-2">Create ad</a>
+}
 <hr />
 <div class="d-flex justify-content-center flex-wrap">
     <div style="width: 50vw;">
