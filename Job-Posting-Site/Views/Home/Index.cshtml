@@ -7,9 +7,10 @@
     {
         <a asp-controller="Ad" asp-action="Create" class="btn btn-primary mb-2">Create ad</a>
     }
+    <div class="row d-flex justify-content-center">
     @foreach(var ad in ViewBag.Ads)
     {
-        <div class="card col-xs-1 text-center" style="width: 20rem;">
+        <div class="card" style="width: 20rem;">
             <ul class="list-group list-group-flush">
                 <li class="list-group-item">
                     <span class="fw-bold">Category: </span> @foreach (var category in ViewBag.Categories)
@@ -21,7 +22,7 @@
 
                     }
                 </li>
-                <li class="list-group-item"><span class="fw-bold">Description: </span> : @(ad.Description?.Substring(0, Math.Min(ad.Description.Length, 10)) + (ad.Description?.Length > 10 ? "..." : ""))</li>
+                <li class="list-group-item"><span class="fw-bold">Description: </span> @(ad.Description?.Substring(0, Math.Min(ad.Description.Length, 10)) + (ad.Description?.Length > 10 ? "..." : ""))</li>
                 <li class="list-group-item">
                     <a asp-controller="Ad" asp-action="Details" asp-route-id="@ad.Id"
                        class="btn btn-primary mb-2">View</a>
@@ -36,6 +37,7 @@
             </ul>
         </div>        
     }
+    </div>
     
     
 </div>

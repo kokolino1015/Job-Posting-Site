@@ -22,7 +22,7 @@ builder.Services.ConfigureApplicationCookie(options =>
 
 builder.Services.AddScoped<AdService, AdService>();
 builder.Services.AddScoped<CommonService, CommonService>();
-
+builder.Services.AddScoped<CategoryService, CategoryService>();
 builder.Services.AddControllersWithViews();
 var app = builder.Build();
 

@@ -1,4 +1,4 @@
-﻿@model Job_Posting_Site.Models.AdViewModel.AdFormModel
+﻿@model Job_Posting_Site.Models.CategoryViewModel.CategoryFormModel
 @{
     ViewData["Title"] = "Delete Ad";
 }
@@ -8,8 +8,7 @@
     <div class="d-flex justify-content-center">
         <div class="card " style="width: 50rem;">
             <div class="card-body">
-                <h3 class="card-title text-center">@Model.Description</h3>
-                <p class="card-text"><span class="fw-bold">Author: </span>@Model.Owner</p>
+                <h3 class="card-title text-center">@Model.Name</h3>
             </div>
             <div class="mb-3 d-flex justify-content-center">
                 <input type="submit" value="Delete" class="btn btn-secondary mb-2" />

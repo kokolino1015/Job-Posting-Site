@@ -1,0 +1,21 @@
+﻿@model Job_Posting_Site.Models.CategoryViewModel.CategoryViewModel
+@{
+    ViewData["Title"] = "Categories";
+}
+
+<div class="container text-center">
+    @if (ViewBag.Role == "employer")
+    {
+        <a asp-controller="Category" asp-action="Create" class="btn btn-primary mb-2">Add new category</a>
+    }
+    <div class="row">
+        @foreach (var category in ViewBag.Categories)
+        {
+            <div class="col">
+                <p class="fs-1">
+                    <a asp-controller="Category" asp-action="Details" asp-route-id="@category.Id" class="btn btn-secondary mb-2">@category.Name</a>
+                </p>
+            </div>
+        }
+    </div>
+</div>
