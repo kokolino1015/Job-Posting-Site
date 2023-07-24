@@ -20,6 +20,10 @@ namespace Job_Posting_Site.Controllers
         [HttpGet]
         public IActionResult Create()
         {
+           if(commonService.FindRole(User).Name != "employer")
+            {
+                return Unauthorized();
+            }
             AdFormModel model = new AdFormModel();
             ViewBag.Categories = adService.GetCategories();
             return View(model);
