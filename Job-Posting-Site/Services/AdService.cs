@@ -67,16 +67,17 @@ namespace Job_Posting_Site.Services
             {
                 return available;
             }
+            if (user.Role.Name == "employer")
+            {
+                available = "employer";
+            }
             foreach (ApplicationUser u in model.Candidates)
             {
                 if (u.Id == user.Id)
                 {
                     available = "applied";
+                    return available;
                 }
-            }
-            if(user.Role.Name == "employer")
-            {
-                available = "employer";
             }
             return available;
         }   
