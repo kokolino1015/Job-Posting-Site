@@ -9,5 +9,6 @@ namespace Job_Posting_Site.Data.Entities
         public Category Category { get; set; }
         public List<ApplicationUser> Candidates { get; set; } = new List<ApplicationUser>();
         public ApplicationUser Owner { get; set; }
+        public bool isDeleted { get; set; }
     }
 }

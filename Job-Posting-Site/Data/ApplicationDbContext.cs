@@ -25,7 +25,7 @@ namespace Job_Posting_Site.Data
                         new Role()
                         {
                             Id = 1,
-                            Name = "employ"
+                            Name = "employer"
                         },
                         new Role()
                         {
@@ -37,27 +37,32 @@ namespace Job_Posting_Site.Data
                     .Entity<Category>()
                     .HasData(
                     new Category() {
-                        Id = 1,
+                        Id = -1,
+                        IsDeleted = false,
                         Name = "QA"
                     },
                     new Category()
                     {
-                        Id = 2,
+                        Id = -2,
+                        IsDeleted = false,
                         Name = "Developer"
                     },
                     new Category()
                     {
-                        Id = 3,
+                        Id = -3,
+                        IsDeleted = false,
                         Name = "Manager"
                     },
                     new Category()
                     {
-                        Id = 4,
+                        Id = -4,
+                        IsDeleted = false,
                         Name = "DevOps"
                     },
                     new Category()
                     {
-                        Id=5,
+                        Id = -5,
+                        IsDeleted = false,
                         Name = "PM"
                     }
                     );
