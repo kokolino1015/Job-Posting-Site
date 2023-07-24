@@ -19,6 +19,10 @@ namespace Job_Posting_Site.Controllers
         [HttpGet]
         public IActionResult Create()
         {
+            if (commonService.FindRole(User).Name != "employer")
+            {
+                return Unauthorized();
+            }
             CategoryFormModel model = new CategoryFormModel();
             return View(model);
         }
@@ -26,6 +30,10 @@ namespace Job_Posting_Site.Controllers
         [HttpPost]
         public IActionResult Create(CategoryFormModel model)
         {
+            if (commonService.FindRole(User).Name != "employer")
+            {
+                return Unauthorized();
+            }
             model.Owner = commonService.FindUser(User);
             categoryService.Create(model);
             return RedirectToAction("Index", "Home");
@@ -44,6 +52,10 @@ namespace Job_Posting_Site.Controllers
         [HttpPost]
         public IActionResult Edit(CategoryFormModel model)
         {
+            if (!categoryService.CheckIfOwner(model.Id, commonService.FindUser(User)))
+            {
+                return Unauthorized();
+            }
             categoryService.Update(model);
             return RedirectToAction("All", "category");
         }
@@ -71,6 +83,10 @@ namespace Job_Posting_Site.Controllers
         [HttpGet]
         public IActionResult Details(int id)
         {
+            if (!categoryService.CheckIfOwner(id, commonService.FindUser(User)))
+            {
+                return Unauthorized();
+            }
             var user = commonService.FindUser(User);
             ViewBag.Owner = user;
             var model = categoryService.GetCategoryById(id);

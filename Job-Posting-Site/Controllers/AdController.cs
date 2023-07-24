@@ -32,6 +32,10 @@ namespace Job_Posting_Site.Controllers
         [HttpPost]
         public IActionResult Create(AdFormModel model)
         {
+            if (commonService.FindRole(User).Name != "employer")
+            {
+                return Unauthorized();
+            }
             model.Owner = commonService.FindUser(User);
             adService.Create(model);
             return RedirectToAction("Index", "Home");
@@ -51,6 +55,10 @@ namespace Job_Posting_Site.Controllers
         [HttpPost]
         public IActionResult Edit(AdFormModel model)
         {
+            if (commonService.FindRole(User).Name != "employer")
+            {
+                return Unauthorized();
+            }
             adService.Update(model);
             return RedirectToAction("Index", "Home");
         }
