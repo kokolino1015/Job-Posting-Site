@@ -1,3 +1,5 @@
+Job Posting Site
+
 1. Introduction:
    We've created a job posting site that benefits both employers and candidates by establishing a quick and simple application process.
 
